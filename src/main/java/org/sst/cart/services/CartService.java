@@ -30,12 +30,12 @@ public class CartService extends HttpService {
         return client.getForObject("/user/" + userId, CartDto[].class);
     }
 
-    public CreateOrUpdateProductsResponse postAddNewProducts(Long userId, LocalDate date, ProductDto[] products) {
+    public CreateOrUpdateProductsResponse addNewProducts(Long userId, LocalDate date, ProductDto[] products) {
         CreateOrUpdateProductsRequestBody requestBody = new CreateOrUpdateProductsRequestBody(userId, date, products);
         return client.postForObject("/", requestBody, CreateOrUpdateProductsResponse.class);
     }
 
-    public CreateOrUpdateProductsResponse putUpdateProducts(Long cartId, Long userId, LocalDate date, ProductDto[] products) {
+    public CreateOrUpdateProductsResponse updateProducts(Long cartId, Long userId, LocalDate date, ProductDto[] products) {
         CreateOrUpdateProductsRequestBody requestBody = new CreateOrUpdateProductsRequestBody(userId, date, products);
         return client.patchForObject("/" + cartId, requestBody, CreateOrUpdateProductsResponse.class);
     }
