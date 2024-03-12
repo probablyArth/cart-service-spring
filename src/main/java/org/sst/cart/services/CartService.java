@@ -1,9 +1,6 @@
 package org.sst.cart.services;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
-import org.springframework.web.util.DefaultUriBuilderFactory;
-import org.sst.cart.CartApplication;
 import org.sst.cart.dtos.CartDto;
 import org.sst.cart.dtos.ProductDto;
 import org.sst.cart.dtos.services.CreateOrUpdateProductsRequestBody;
@@ -12,12 +9,9 @@ import org.sst.cart.dtos.services.CreateOrUpdateProductsResponse;
 import java.time.LocalDate;
 
 @Service
-public class CartService {
-
-    final private RestTemplate client = new RestTemplate();
-
+public class CartService extends HttpService {
     public CartService() {
-        client.setUriTemplateHandler(new DefaultUriBuilderFactory("https://fakestoreapi.com/carts"));
+        this.init("https://fakestoreapi.com/carts");
     }
 
     public CartDto[] getAllCarts() {
