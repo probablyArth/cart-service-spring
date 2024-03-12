@@ -7,9 +7,9 @@ import java.time.LocalDate;
 public class CreateOrUpdateProductsRequestBody {
     public Long userId;
     public LocalDate date;
-    public ProductDto[] products;
+    public CartProductDto[] products;
 
-    public CreateOrUpdateProductsRequestBody(Long userId, LocalDate date, ProductDto[] products) {
+    public CreateOrUpdateProductsRequestBody(Long userId, LocalDate date, CartProductDto[] products) {
         this.userId = userId;
         this.date = date;
         this.products = products;

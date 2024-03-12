@@ -3,6 +3,7 @@ package org.sst.cart.services;
 import org.springframework.stereotype.Service;
 import org.sst.cart.dtos.CartDto;
 import org.sst.cart.dtos.ProductDto;
+import org.sst.cart.dtos.services.CartProductDto;
 import org.sst.cart.dtos.services.CreateOrUpdateProductsRequestBody;
 import org.sst.cart.dtos.services.CreateOrUpdateProductsResponse;
 
@@ -30,14 +31,14 @@ public class CartService extends HttpService {
         return client.getForObject("/user/" + userId, CartDto[].class);
     }
 
-    public CreateOrUpdateProductsResponse addNewProducts(Long userId, LocalDate date, ProductDto[] products) {
+    public CreateOrUpdateProductsResponse addNewProducts(Long userId, LocalDate date, CartProductDto[] products) {
         CreateOrUpdateProductsRequestBody requestBody = new CreateOrUpdateProductsRequestBody(userId, date, products);
         return client.postForObject("/", requestBody, CreateOrUpdateProductsResponse.class);
     }
 
-    public CreateOrUpdateProductsResponse updateProducts(Long cartId, Long userId, LocalDate date, ProductDto[] products) {
+    public void updateProducts(Long cartId, Long userId, LocalDate date, CartProductDto[] products) {
         CreateOrUpdateProductsRequestBody requestBody = new CreateOrUpdateProductsRequestBody(userId, date, products);
-        return client.patchForObject("/" + cartId, requestBody, CreateOrUpdateProductsResponse.class);
+        client.put("/" + cartId, requestBody);
     }
 
     public void deleteCartById(Long cartId) {

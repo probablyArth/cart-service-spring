@@ -34,9 +34,10 @@ public class CartController {
         return cartService.addNewProducts(body.userId, body.date, body.products);
     }
 
-    @PatchMapping("/carts/{id}")
-    public CreateOrUpdateProductsResponse patchUpdateProducts(@PathVariable Long id,@RequestBody CreateOrUpdateProductsRequestBody body) {
-        return cartService.updateProducts(id, body.userId, body.date, body.products);
+    @PutMapping("/carts/{id}")
+    public ResponseEntity<HttpStatus> patchUpdateProducts(@PathVariable Long id,@RequestBody CreateOrUpdateProductsRequestBody body) {
+        cartService.updateProducts(id, body.userId, body.date, body.products);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/carts/{id}")
